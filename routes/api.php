@@ -18,14 +18,7 @@ Route::delete('/product/{id}', [ProductController::class, 'deleteProduct']);
 
 Route::put('/product-name/{id}', [ProductController::class, 'updateProductName']);
 
-Route::post('/login', function(Request $request){
-    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-        $user = Auth::user();
-        $token = $user->createToken('JWT');
-        return ["msg" => "Login efetuado com sucesso", "token" => $token->plainTextToken];
-    }
-    return ["msg" => "Usuario invalido"];
-});
+Route::post('/login', [UserController::class, 'login']);
 
 Route::put('/product-description/{id}', [ProductController::class, 'updateProductDescription']);
 

@@ -17,5 +17,13 @@ class UserController extends Controller
         return ["msg" => "Usuário cadastrado!"];
     }
     
+    public static function login(Request $request){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            $user = Auth::user();
+            $token = $user->createToken('JWT');
+            return ["msg" => "Login efetuado com sucesso", "token" => $token->plainTextToken];
+        }
+        return ["msg" => "Usuario invalido"];
+    }
 
 }
