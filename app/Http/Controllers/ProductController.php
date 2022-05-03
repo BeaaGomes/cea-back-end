@@ -9,12 +9,15 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     public static function createProduct(){
-        DB::table('products')->insert([
-            'name' => 'Banana Caturra',
-            'description' => 'Banana bonita',
-            'price' => 10.54,
-            'image' => 'blabla'            
-        ]);
+        $product = new Product();
+
+        $product->name = 'Banana Caturra';
+        $product->description = 'Banana bonita';
+        $product->price = 10.54;
+        $product->image = 'blabla';
+
+        $product->save();
+        
         $response = ["msg" => "produto cadastrado"];
         return json_encode($response);
     }
