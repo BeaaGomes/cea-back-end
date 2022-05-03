@@ -25,4 +25,8 @@ class ProductController extends Controller
         return $product; 
     }
 
+    public static function deleteProduct($id){
+        $product = Product::find($id)->delete();
+        return ["msg" => "Produto deletado!"];
+    }
 }

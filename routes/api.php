@@ -13,3 +13,5 @@ Route::get('/product/{id}', [ProductController::class, 'getProduct']);
 
 Route::get('/products', [ProductController::class, 'getProducts']);
 
+Route::get('/product/delete/{id}', [ProductController::class, 'deleteProduct']);
+
