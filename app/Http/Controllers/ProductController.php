@@ -8,17 +8,13 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public static function createProduct(){
-        $product = new Product();
+    public static function createProduct(Request $request){
 
-        $product->name = 'Banana Caturra';
-        $product->description = 'Banana bonita';
-        $product->price = 10.54;
-        $product->image = 'blabla';
+        $product = $request->all();
 
-        $product->save();
-        
-        $response = ["msg" => "produto cadastrado"];
+        Product::create($product);
+
+        $response = ["msg" => "Produto cadastrado!"];
         return json_encode($response);
     }
 }
