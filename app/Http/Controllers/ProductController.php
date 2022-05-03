@@ -59,4 +59,14 @@ class ProductController extends Controller
 
         return ["msg" => "Preço do produto foi atualizado!"];
     }
+
+    public static function updateProductImage($id, Request $request){
+        $product = Product::find($id);
+
+        $product->image = $request->get("image");
+
+        $product->save();
+
+        return ["msg" => "Imagem do produto foi atualizada!"];
+    }
 }

@@ -22,6 +22,8 @@ Route::put('/product-description/{id}', [ProductController::class, 'updateProduc
 
 Route::put('/product-price/{id}', [ProductController::class, 'updateProductPrice']);
 
+Route::put('/product-image/{id}', [ProductController::class, 'updateProductImage']);
+
 Route::post('/user', [UserController::class, 'createUser']);
 
 
