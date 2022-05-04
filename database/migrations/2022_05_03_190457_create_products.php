@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->decimal('price', 9, 3);
             $table->string('image');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
