@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Auth;
+
 class Product extends Model
 {
     use HasFactory;
@@ -17,4 +19,27 @@ class Product extends Model
         'image',
         'user_id'
     ];
+
+    public function tryToUpdate($field, $new_value){
+        $user = Auth::user();
+        
+        if ($user->id == $this->user_id){
+            $this[$field] = $new_value;
+            $this->save();
+            return true;
+        }
+
+        return false;
+    }
+
+    public function tryToDelete(){
+        $user = Auth::user();
+        
+        if ($user->id == $this->user_id){
+            $this->delete();
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -13,6 +13,7 @@ class ProductController extends Controller
         $product = $request->all();
         $user = Auth::user();
         $product["user_id"] = $user->id;
+
         Product::create($product);
 
         return ["msg" => "Produto cadastrado!"];
@@ -23,8 +24,7 @@ class ProductController extends Controller
     }
 
     public static function getProduct($id){
-        $product = Product::find($id);
-        return $product; 
+        return Product::find($id);
     }
 
     public static function getProducts(){
@@ -33,11 +33,9 @@ class ProductController extends Controller
     }
 
     public static function deleteProduct($id){
-        $user = Auth::user();
         $product = Product::find($id);
         
-        if ($user->id == $product->user_id){
-            $product->delete();
+        if ($product->tryToDelete()){
             return ["msg" => "Produto deletado!"];
         } 
         
@@ -45,40 +43,29 @@ class ProductController extends Controller
     }
 
     public static function updateProductName($id, Request $request){
-        $user = Auth::user();
         $product = Product::find($id);
-        
-        if ($user->id == $product->user_id){
-            $product->name = $request->name;
-            $product->save();
+
+        if($product->tryToUpdate("name", $request->new_value)){
             return ["msg" => "Nome do produto foi atualizado!"];
         }
 
         return ["msg" => "Não é possível atualizar o nome de um produto de outra pessoa :)"];
-       
     }
 
     public static function updateProductDescription($id, Request $request){
-        $user = Auth::user();
         $product = Product::find($id);
         
-        if ($user->id == $product->user_id){
-            $product->description = $request->get("description");
-            $product->save();
-            return ["msg" => "Descrição do produto foi atualizada!"];
+        if($product->tryToUpdate("description", $request->new_value)){
+            return ["msg" => "Descrição do produto foi atualizado!"];
         }
 
         return ["msg" => "Não é possível atualizar a descrição de um produto de outra pessoa :)"];
-        
     }
 
     public static function updateProductPrice($id, Request $request){
-        $user = Auth::user();
         $product = Product::find($id);
         
-        if ($user->id == $product->user_id){
-            $product->price = $request->price;
-            $product->save();
+        if($product->tryToUpdate("price", $request->new_value)){
             return ["msg" => "Preço do produto foi atualizado!"];
         }
 
@@ -86,15 +73,12 @@ class ProductController extends Controller
     }
 
     public static function updateProductImage($id, Request $request){
-        $user = Auth::user();
         $product = Product::find($id);
         
-        if ($user->id == $product->user_id){
-            $product->image = $request->image;
-            $product->save();
-            return ["msg" => "Imagem do produto foi atualizada!"];
+        if($product->tryToUpdate("image", $request->new_value)){
+            return ["msg" => "Imagem do produto foi atualizado!"];
         }
 
-        return ["msg" => "Não é possível atualizar a imagem de um produto de outra pessoa :)"];
+        return ["msg" => "Não é possível atualizar o imagem de um produto de outra pessoa :)"];
     }
 }
