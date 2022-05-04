@@ -26,6 +26,12 @@ Route::middleware("auth:sanctum")->put('/product-price/{id}', [ProductController
 
 Route::middleware("auth:sanctum")->put('/product-image/{id}', [ProductController::class, 'updateProductImage']);
 
+Route::middleware("auth:sanctum")->put('/user-name/{id}', [UserController::class, 'updateUserName']);
+
+Route::middleware("auth:sanctum")->put('/user-email/{id}', [UserController::class, 'updateUserEmail']);
+
+Route::middleware("auth:sanctum")->put('/user-password/{id}', [UserController::class, 'updateUserPassword']);
+
 Route::post('/user', [UserController::class, 'createUser']);
 
 
