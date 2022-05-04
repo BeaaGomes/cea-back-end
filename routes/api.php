@@ -12,6 +12,8 @@ Route::middleware("auth:sanctum")->post('/product', [ProductController::class, '
 
 Route::middleware("auth:sanctum")->get('/product/{id}', [ProductController::class, 'getProduct']);
 
+Route::get('/all-products', [ProductController::class, 'getAllProducts']);
+
 Route::middleware("auth:sanctum")->get('/products', [ProductController::class, 'getProducts']);
 
 Route::middleware("auth:sanctum")->delete('/product/{id}', [ProductController::class, 'deleteProduct']);

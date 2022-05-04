@@ -18,13 +18,18 @@ class ProductController extends Controller
         return ["msg" => "Produto cadastrado!"];
     }
 
-    public static function getProducts(){
+    public static function getAllProducts(){
         return Product::all();
     }
 
     public static function getProduct($id){
         $product = Product::find($id);
         return $product; 
+    }
+
+    public static function getProducts(){
+        $user = Auth::user();
+        return Product::where("user_id", $user->id)->get();
     }
 
     public static function deleteProduct($id){
