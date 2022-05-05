@@ -13,6 +13,7 @@ class ProductController extends Controller
         $product = $request->all();
         $user = Auth::user();
         $product["user_id"] = $user->id;
+        $product["image"] = $request->file("image")->store("public/images");
 
         Product::create($product);
 
@@ -74,11 +75,17 @@ class ProductController extends Controller
 
     public static function updateProductImage($id, Request $request){
         $product = Product::find($id);
+
+        $product->deleteImage();
+
+        $new_value = $request->file("new_value")->store("public/images");
         
-        if($product->tryToUpdate("image", $request->new_value)){
+        if($product->tryToUpdate("image", $new_value)){
             return ["msg" => "Imagem do produto foi atualizado!"];
         }
 
         return ["msg" => "Não é possível atualizar o imagem de um produto de outra pessoa :)"];
     }
+
+
 }

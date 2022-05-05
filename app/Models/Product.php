@@ -34,12 +34,21 @@ class Product extends Model
 
     public function tryToDelete(){
         $user = Auth::user();
-        
+
         if ($user->id == $this->user_id){
+            $this->deleteImage();
             $this->delete();
             return true;
         }
 
         return false;
+    }
+
+    public function deleteImage(){
+        unlink($this->fixImagePath($this->image));
+    }
+
+    private function fixImagePath($image_path){
+        return "storage/" . substr($image_path, 6);
     }
 }

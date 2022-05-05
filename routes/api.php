@@ -26,7 +26,7 @@ Route::middleware("auth:sanctum")->put('/product-description/{id}', [ProductCont
 
 Route::middleware("auth:sanctum")->put('/product-price/{id}', [ProductController::class, 'updateProductPrice']);
 
-Route::middleware("auth:sanctum")->put('/product-image/{id}', [ProductController::class, 'updateProductImage']);
+Route::middleware("auth:sanctum")->post('/product-image/{id}', [ProductController::class, 'updateProductImage']);
 
 Route::middleware("auth:sanctum")->put('/user-name/{id}', [UserController::class, 'updateUserName']);
 
