@@ -30,9 +30,9 @@ Route::middleware("auth:sanctum")->post('/product-image/{id}', [ProductControlle
 
 Route::middleware("auth:sanctum")->put('/user-name/{id}', [UserController::class, 'updateUserName']);
 
-Route::middleware("auth:sanctum")->put('/user-email/{id}', [UserController::class, 'updateUserEmail']);
+Route::middleware("auth:sanctum")->put('/user-email', [UserController::class, 'updateUserEmail']);
 
-Route::middleware("auth:sanctum")->put('/user-password/{id}', [UserController::class, 'updateUserPassword']);
+Route::middleware("auth:sanctum")->put('/user-password', [UserController::class, 'updateUserPassword']);
 
 Route::post('/user', [UserController::class, 'createUser']);
 
